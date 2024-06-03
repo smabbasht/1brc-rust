@@ -17,7 +17,6 @@ fn main() {
 
     let mut data: HashMap<String, [f32; 4]> = HashMap::new();
 
-    let mut counter = 0;
     for line in contents.lines() {
         if let Some((state, temperature)) = line.split_once(';') {
             let temperature: f32 = temperature.trim().parse().unwrap_or(0.0);
@@ -28,10 +27,6 @@ fn main() {
             entry[1] = (entry[1] * entry[3] + temperature) / (entry[3] + 1.0);
             entry[2] = entry[2].max(temperature);
             entry[3] += 1.0;
-        }
-        counter += 1;
-        if counter == 1_000_000 {
-            println!("{}", counter);
         }
     }
 
